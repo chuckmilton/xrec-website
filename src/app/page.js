@@ -1,9 +1,7 @@
-import Navbar from './components/Navbar';
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
       <main className="flex flex-col items-center justify-center h-[85vh] text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-beige mt-4">
           XR Engineering Club

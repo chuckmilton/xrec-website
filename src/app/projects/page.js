@@ -1,7 +1,4 @@
 // app/projects/page.js
-import Navbar from '../components/Navbar'
-import Image from 'next/image';
-
 const projects = [
   {
     title: 'The Hub',
@@ -33,7 +30,6 @@ const projects = [
 export default function Projects() {
     return (
       <div>
-        <Navbar />
         <main className="p-8 text-gray-900">
           <h2 className="text-3xl font-semibold mb-6">Projects</h2>
           {projects.map((project, index) => (

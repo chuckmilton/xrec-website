@@ -1,6 +1,4 @@
 // app/officers/page.js
-import Navbar from '../components/Navbar'
-import Image from 'next/image';
 import { FaEnvelope, FaLinkedin } from 'react-icons/fa'
 
 const officers = [
@@ -45,7 +43,6 @@ const officers = [
 export default function Officers() {
     return (
       <div>
-        <Navbar />
         <main className="p-8">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">Officers</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
