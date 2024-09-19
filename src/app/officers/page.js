@@ -1,6 +1,6 @@
 // app/officers/page.js
 import Navbar from '../components/Navbar'
-
+import Image from 'next/image';
 import { FaEnvelope, FaLinkedin } from 'react-icons/fa'
 
 const officers = [
