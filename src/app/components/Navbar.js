@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-foreground p-2">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center font-semibold mx-2">
         {/* Logo */}
         <Link href="/">
           <img
@@ -82,7 +82,7 @@ export default function Navbar() {
           menuOpen ? 'max-h-96' : 'max-h-0'
         }`}
       >
-        <ul className="mt-4 space-y-4 md:hidden text-beige">
+        <ul className="mt-4 space-y-4 md:hidden text-beige font-semibold">
           <li>
             <Link href="/" className={linkClasses('/')}>
               Home

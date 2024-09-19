@@ -18,7 +18,7 @@ export default function Events() {
     <div>
       <Navbar />
       <main className="p-8 text-gray-900">
-        <h2 className="text-3xl mb-6">Upcoming Events</h2>
+        <h2 className="text-3xl font-semibold mb-6">Upcoming Events</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.map((event, index) => (
             <div

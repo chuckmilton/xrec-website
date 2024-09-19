@@ -1,27 +1,46 @@
-// app/contact/page.js
 "use client";
 import Navbar from '../components/Navbar'
 import { useState } from 'react'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission logic (e.g., send to an API)
-    alert('Message sent!')
+    setStatus('Sending...')
+
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setStatus('Message sent successfully!')
+        setForm({ name: '', email: '', message: '' }) // Clear the form
+      } else {
+        setStatus('Failed to send message')
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setStatus('An error occurred. Please try again later.')
+    }
   }
 
   return (
     <div>
       <Navbar />
       <main className="p-8">
-        <h2 className="text-3xl mb-6 text-gray-900">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="max-w-md">
+        <h2 className="text-3xl font-semibold mb-6 text-gray-900">Contact Us</h2>
+        <form onSubmit={handleSubmit} className="max-w-md text-gray-900">
           <div className="mb-4">
             <label className="block">Name</label>
             <input
@@ -54,12 +73,10 @@ export default function Contact() {
               required
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="bg-blue-600 text-white p-2 rounded"
-          >
+          <button type="submit" className="bg-orange p-2 rounded">
             Send Message
           </button>
+          {status && <p className="mt-4">{status}</p>}
         </form>
       </main>
     </div>
