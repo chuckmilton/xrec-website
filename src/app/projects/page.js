@@ -54,7 +54,7 @@ export default function Projects() {
                       preload="metadata"
                     ></video>
                   ) : (
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
                       className="absolute inset-0 w-full h-full object-cover"

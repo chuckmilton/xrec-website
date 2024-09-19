@@ -9,7 +9,7 @@ export default function Home() {
           XR Engineering Club
         </h1>
         <p className="mt-2 text-lg sm:text-xl md:text-2xl text-beige">
-          Welcome to XREC's Official Website
+          Welcome to XREC&#39;s Official Website
         </p>
       </main>
     </div>

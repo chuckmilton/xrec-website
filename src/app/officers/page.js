@@ -51,7 +51,7 @@ export default function Officers() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {officers.map((officer, index) => (
               <div key={index} className="bg-beige p-6 rounded shadow overflow-hidden transform transition-transform duration-200 hover:scale-105">
-                <img
+                <Image
                   src={officer.image}
                   alt={officer.name}
                   className="w-full h-64 object-cover rounded"

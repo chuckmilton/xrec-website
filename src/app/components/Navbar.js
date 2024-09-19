@@ -16,7 +16,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center font-semibold mx-2">
         {/* Logo */}
         <Link href="/">
-          <img
+          <Image
             src="/images/vroc_logo.jpg"
             alt="VROC Logo"
             className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full"
