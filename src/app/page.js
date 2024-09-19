@@ -5,8 +5,13 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <main className="flex items-center justify-center h-screen">
-        <h1 className="text-5xl font-bold">XR Engineering Club</h1>
+      <main className="flex flex-col items-center justify-center h-screen text-center">
+        <h1 className="text-5xl font-bold text-beige">
+          XR Engineering Club
+        </h1>
+        <p className="mt-4 text-xl text-beige">
+          Welcome to XREC's Official Website
+        </p>
       </main>
     </div>
   )

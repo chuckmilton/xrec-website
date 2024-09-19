@@ -1,4 +1,5 @@
 // app/contact/page.js
+"use client";
 import Navbar from '../components/Navbar'
 import { useState } from 'react'
 
@@ -19,7 +20,7 @@ export default function Contact() {
     <div>
       <Navbar />
       <main className="p-8">
-        <h2 className="text-3xl mb-6">Contact Us</h2>
+        <h2 className="text-3xl mb-6 text-gray-900">Contact Us</h2>
         <form onSubmit={handleSubmit} className="max-w-md">
           <div className="mb-4">
             <label className="block">Name</label>
