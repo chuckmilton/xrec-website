@@ -37,10 +37,10 @@ export default function Contact() {
   return (
     <div>
       <main className="p-8">
-        <h2 className="text-3xl font-semibold mb-6 text-gray-900">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="max-w-md text-gray-900">
+        <h2 className="text-3xl font-semibold mb-6 text-beige">Contact Us</h2>
+        <form onSubmit={handleSubmit} className="max-w-md text-gray-900 bg-beige p-6 rounded shadow">
           <div className="mb-4">
-            <label className="block">Name</label>
+            <label className="block">Name:</label>
             <input
               type="text"
               name="name"
@@ -51,7 +51,7 @@ export default function Contact() {
             />
           </div>
           <div className="mb-4">
-            <label className="block">Email</label>
+            <label className="block">Email:</label>
             <input
               type="email"
               name="email"
@@ -62,7 +62,7 @@ export default function Contact() {
             />
           </div>
           <div className="mb-4">
-            <label className="block">Message</label>
+            <label className="block">Message:</label>
             <textarea
               name="message"
               className="w-full border p-2 rounded"

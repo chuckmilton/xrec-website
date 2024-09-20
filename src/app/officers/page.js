@@ -44,7 +44,7 @@ export default function Officers() {
     return (
       <div>
         <main className="p-8">
-          <h2 className="text-3xl font-semibold mb-6 text-gray-900">Officers</h2>
+          <h2 className="text-3xl font-semibold mb-6 text-beige">Officers</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {officers.map((officer, index) => (
               <div key={index} className="bg-beige p-6 rounded shadow overflow-hidden transform transition-transform duration-200 hover:scale-105">

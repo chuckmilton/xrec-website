@@ -30,12 +30,12 @@ const projects = [
 export default function Projects() {
     return (
       <div>
-        <main className="p-8 text-gray-900">
-          <h2 className="text-3xl font-semibold mb-6">Projects</h2>
+        <main className="p-8">
+          <h2 className="text-3xl font-semibold mb-6 text-beige">Projects</h2>
           {projects.map((project, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row mb-8 items-center"
+              className="flex flex-col md:flex-row mb-8 items-center text-gray-900 bg-beige p-6 rounded shadow"
             >
               {/* Media Container */}
               <div className="w-full md:w-1/2 rounded overflow-hidden">
@@ -61,7 +61,7 @@ export default function Projects() {
               </div>
               {/* Description */}
               <div className="md:ml-6 mt-4 md:mt-0 md:w-1/2">
-                <h3 className="text-2xl font-semibold">{project.title}</h3>
+                <h3 className="text-3xl font-semibold">{project.title}</h3>
                 <p className="mt-2">{project.description}</p>
               </div>
             </div>
