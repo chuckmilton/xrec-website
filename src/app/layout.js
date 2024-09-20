@@ -2,6 +2,7 @@ import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
+
 export const metadata = {
   title: 'XR Engineering Club',
   description: 'Welcome to the XR Engineering Club website',

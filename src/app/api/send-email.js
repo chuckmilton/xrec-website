@@ -1,5 +1,3 @@
-// pages/api/send-email.js
-
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
@@ -19,7 +17,7 @@ export default async function handler(req, res) {
       // Send email
       await transporter.sendMail({
         from: email, // Sender's email
-        to: process.env.RECIPIENT, // Receiver's email
+        to: process.env.RECIPIENT, // Your email (receiver)
         subject: `Contact form submission from ${name}`,
         text: `You have a new message from ${name} (${email}): \n\n${message}`,
       });
@@ -27,6 +25,7 @@ export default async function handler(req, res) {
       // Send success response
       res.status(200).json({ message: 'Email sent successfully' });
     } catch (error) {
+      console.error('Error sending email:', error);
       // Send error response
       res.status(500).json({ error: 'Failed to send email' });
     }
