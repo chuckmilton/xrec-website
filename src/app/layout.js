@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 
 export const metadata = {
   title: 'XR Engineering Club',
-  description: 'Welcome to the XR Engineering Club website',
+  description: 'Welcome to the XR Engineering Club website at CSULB',
 };
 
 export default function RootLayout({ children }) {

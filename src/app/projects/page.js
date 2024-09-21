@@ -55,7 +55,7 @@ export default function Projects() {
             >
               {/* Image/Video Container */}
               <div
-                className="relative w-full md:w-1/2 transition-transform duration-500 group-hover:translate-x-0 md:group-hover:translate-x-[-50%]"
+                className="relative w-full md:w-1/2 h-64 md:h-auto transition-transform duration-500 group-hover:translate-x-0 md:group-hover:translate-x-[-50%]"
                 style={{
                   height: '100%',
                   zIndex: 3,
@@ -81,14 +81,13 @@ export default function Projects() {
                   />
                 )}
 
-                {/* Arrow Icon */}
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-4xl text-gray-700 opacity-100 group-hover:opacity-0 transition-opacity duration-500 md:block hidden">
-                  <img
-                    src="images/right-arrow.svg"
-                    alt="Right arrow"
-                    className="w-6 h-6" // Adjust size as necessary
-                  />
+                {/* Title Overlay - Visible only on large screens and above */}
+                <div className="hidden md:flex absolute inset-0 items-center justify-center bg-black bg-opacity-50 transition-opacity duration-500 group-hover:bg-opacity-0">
+                  <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-semibold transition-opacity duration-500 group-hover:opacity-0">
+                    {project.title}
+                  </h3>
                 </div>
+          
               </div>
 
               {/* Description Section */}

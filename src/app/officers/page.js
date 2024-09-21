@@ -8,7 +8,7 @@ const officers = [
     role: 'President, Hardware Lead',
     email: 'diegodavalos234@gmail.com',
     image: '/images/diego.png',
-    linkedin: 'https://www.linkedin.com/in/diego-davalos-5aa2b2234/'
+    linkedin: 'https://www.linkedin.com/in/diego-davalos-5aa2b2234/',
   },
   {
     name: 'Anton Katona',

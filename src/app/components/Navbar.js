@@ -16,12 +16,17 @@ export default function Navbar() {
       <div className="flex justify-between items-center font-semibold mx-2">
         {/* Logo */}
         <Link href="/">
-          <img
+        <div className='w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-beige flex items-center space-x-2'>
+        <img
             src="/images/vroc_logo.jpg"
             alt="VROC Logo"
-            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full"
+            className="rounded-full"
           />
+           <h1 className='text-xs md:text-sm lg:text-base whitespace-nowrap'>XREC @ CSULB</h1>
+        </div>
+          
         </Link>
+       
 
         {/* Hamburger menu button for mobile */}
         <div className="md:hidden">
@@ -47,7 +52,7 @@ export default function Navbar() {
         </div>
 
         {/* Full menu for larger screens */}
-        <ul className="hidden md:flex space-x-6 text-beige">
+        <ul className="hidden md:flex space-x-8 text-beige">
           <li>
             <Link href="/" className={linkClasses('/')}>
               Home

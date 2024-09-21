@@ -38,43 +38,53 @@ export default function Contact() {
     <div>
       <main className="p-8">
         <h2 className="text-4xl font-semibold mb-6 text-beige">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="max-w-md text-gray-900 bg-beige p-6 rounded shadow">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto text-gray-900 bg-beige p-6 rounded shadow"
+        >
           <div className="mb-4">
-            <label className="block">Name:</label>
+            <label className="block mb-2">Name:</label>
             <input
               type="text"
               name="name"
-              className="w-full border p-2 rounded"
+              className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={form.name}
               onChange={handleChange}
               required
+              placeholder="Your Name"
             />
           </div>
           <div className="mb-4">
-            <label className="block">Email:</label>
+            <label className="block mb-2">Email:</label>
             <input
               type="email"
               name="email"
-              className="w-full border p-2 rounded"
+              className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={form.email}
               onChange={handleChange}
               required
+              placeholder="you@example.com"
             />
           </div>
           <div className="mb-4">
-            <label className="block">Message:</label>
+            <label className="block mb-2">Message:</label>
             <textarea
               name="message"
-              className="w-full border p-2 rounded"
+              className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={form.message}
               onChange={handleChange}
               required
+              placeholder="Your message..."
+              rows="5"
             ></textarea>
           </div>
-          <button type="submit" className="bg-orange p-2 rounded">
+          <button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-orange font-semibold py-2 px-4 rounded transition-colors duration-300"
+          >
             Send Message
           </button>
-          {status && <p className="mt-4">{status}</p>}
+          {status && <p className="mt-4 text-center">{status}</p>}
         </form>
       </main>
     </div>
