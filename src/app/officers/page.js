@@ -35,7 +35,7 @@ const officers = [
     name: 'Charles Milton',
     role: 'Webmaster',
     email: 'chuckmilton123@gmail.com',
-    image: '/images/charles.jpeg',
+    image: '/images/charles.png',
     linkedin: 'https://www.linkedin.com/in/charles-milton-0b679427b/'
   },
   // Add more officers as needed
@@ -53,7 +53,7 @@ export default function Officers() {
     <div>
       <main className="p-8">
         <h2 className="text-4xl font-semibold mb-6 text-beige">Officers</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
           {officers.map((officer, index) => (
             <div
               key={index}

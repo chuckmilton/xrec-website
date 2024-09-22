@@ -16,13 +16,13 @@ export default function Navbar() {
       <div className="flex justify-between items-center font-semibold mx-2">
         {/* Logo */}
         <Link href="/">
-        <div className='w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-beige flex items-center space-x-2'>
+        <div className='w-12 h-12 md:w-16 md:h-16 text-beige flex items-center space-x-2'>
         <img
             src="/images/vroc_logo.jpg"
             alt="VROC Logo"
             className="rounded-full"
           />
-           <h1 className='text-xs md:text-sm lg:text-base whitespace-nowrap'>XREC @ CSULB</h1>
+           <h1 className='text-xs md:text-sm whitespace-nowrap'>XREC @ CSULB</h1>
         </div>
           
         </Link>

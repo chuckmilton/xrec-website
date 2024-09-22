@@ -46,7 +46,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`relative group flex flex-col md:flex-row justify-center items-center w-full bg-transparent p-0 md:p-0 overflow-hidden transition-all duration-700 ease-out
+              className={`rounded relative group flex flex-col md:flex-row justify-center items-center w-full bg-transparent p-0 md:p-0 overflow-hidden transition-all duration-700 ease-out
               transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}
               style={{
                 minHeight: '300px',
