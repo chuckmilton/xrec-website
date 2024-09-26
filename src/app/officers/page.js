@@ -33,7 +33,7 @@ const officers = [
   },
   {
     name: 'Charles Milton',
-    role: 'Webmaster',
+    role: 'Web Developer',
     email: 'chuckmilton123@gmail.com',
     image: '/images/charles.png',
     linkedin: 'https://www.linkedin.com/in/charles-milton-0b679427b/'
