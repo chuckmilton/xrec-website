@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const events = [
   {
-    date: 'Oct. 6, 2024',
+    date: 'Oct. 7, 2024',
     time: '5:30-6:30 PM',
     title: 'General Body Meeting',
     description: "Join us for XREC's first General Body Meeting and dive into the world of immersive tech! Discover exciting projects, hands-on opportunities, and how you can be part of the future of XR—don’t miss it! 🚀",
