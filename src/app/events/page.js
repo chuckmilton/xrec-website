@@ -2,12 +2,12 @@ import Image from 'next/image'
 
 const events = [
   {
-    date: 'Date: TBD',
-    time: 'Time: TBD',
+    date: 'Oct. 6, 2024',
+    time: '5:30-6:30 PM',
     title: 'General Body Meeting',
     description: "Join us for XREC's first General Body Meeting and dive into the world of immersive tech! Discover exciting projects, hands-on opportunities, and how you can be part of the future of XR—don’t miss it! 🚀",
-    location: 'Location: TBD',
-    image: '/images/ecs.jpg', // Ensure this image exists in your public/images directory
+    location: 'University Library - Lower Level Room 005',
+    image: '/images/ispacebg.jpg', // Ensure this image exists in your public/images directory
   },
   // Add more events as needed
 ]
@@ -34,7 +34,13 @@ export default function Events() {
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                 <p className="text-gray-700 mb-2">{event.description}</p>
                 <p className="text-gray-600">
-                  {event.date} &middot; {event.time} &middot; {event.location}
+                  Date: {event.date}
+                </p>
+                <p className="text-gray-600">
+                  Time: {event.time} 
+                </p>
+                <p className="text-gray-600">
+                  Location: {event.location}
                 </p>
               </div>
             </div>
