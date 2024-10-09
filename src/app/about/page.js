@@ -49,6 +49,7 @@ export default function AboutUs() {
               <Image 
                 src="/images/group.jpeg"
                 alt="XREC Group Photo"
+                layout="responsive"
                 width={800}
                 height={500}
                 className="rounded shadow-lg"

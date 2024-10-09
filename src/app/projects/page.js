@@ -78,6 +78,7 @@ export default function Projects() {
                   <Image
                     src={project.image}
                     alt={project.title}
+                    layout="responsive"
                     width={800}
                     height={500} // You can adjust the size based on the original image's aspect ratio
                     className="object-cover w-full h-full"
