@@ -37,7 +37,7 @@ export default function Contact() {
   return (
     <div>
       <main className="p-8">
-        <h2 className="text-4xl font-semibold mb-6 text-beige">Contact Us</h2>
+        <h2 className="text-5xl font-semibold mb-8 text-beige">Contact Us</h2>
         <form
           onSubmit={handleSubmit}
           className="max-w-md mx-auto text-gray-900 bg-beige p-6 rounded shadow"

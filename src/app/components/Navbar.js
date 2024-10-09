@@ -59,6 +59,11 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
+            <Link href="/about" className={linkClasses('/about')}>
+              About Us
+            </Link>
+          </li>
+          <li>
             <Link href="/officers" className={linkClasses('/officers')}>
               Officers
             </Link>
@@ -91,6 +96,11 @@ export default function Navbar() {
           <li>
             <Link href="/" className={linkClasses('/')}>
               Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className={linkClasses('/about')}>
+              About Us
             </Link>
           </li>
           <li>

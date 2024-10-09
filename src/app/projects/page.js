@@ -41,7 +41,7 @@ export default function Projects() {
   return (
     <div>
       <main className="p-8">
-        <h2 className="text-4xl font-semibold mb-6 text-beige">Projects</h2>
+        <h2 className="text-5xl font-semibold mb-8 text-beige">Projects</h2>
         <div className="grid grid-cols-1 gap-8">
           {projects.map((project, index) => (
             <div

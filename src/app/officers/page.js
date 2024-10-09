@@ -19,7 +19,7 @@ const officers = [
   },
   {
     name: 'Russell Harral',
-    role: 'Hole in The Wall Lead',
+    role: 'Assistant Project Manager',
     email: 'russellharral4@gmail.com',
     image: '/images/russell.jpg',
     linkedin: 'https://www.linkedin.com/in/russell-harral-75a30720b/'
@@ -52,7 +52,7 @@ export default function Officers() {
   return (
     <div>
       <main className="p-8">
-        <h2 className="text-4xl font-semibold mb-6 text-beige">Officers</h2>
+        <h2 className="text-5xl font-semibold mb-8 text-beige">Officers</h2>
         <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
           {officers.map((officer, index) => (
             <div

@@ -45,10 +45,8 @@ export const metadata = {
 
   // Charset meta tag (important for encoding)
   charset: 'UTF-8',
-
-  // Viewport for responsive web design
-  viewport: 'width=device-width, initial-scale=1.0',
 };
+export const generateViewport = () => 'width=device-width, initial-scale=1.0';
 
 
 export default function RootLayout({ children }) {
