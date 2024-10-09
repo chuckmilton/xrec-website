@@ -1,5 +1,7 @@
 "use client";
+
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
 
 const officers = [
@@ -61,9 +63,11 @@ export default function Officers() {
               ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-[-100%]'}`}
               style={{ transitionDelay: `${index * 0.2}s` }} // Add a slight delay between each card animation
             >
-              <img
+              <Image
                 src={officer.image}
                 alt={officer.name}
+                width={400}  // You can adjust the size
+                height={400} // based on the original image's aspect ratio
                 className="w-full h-64 object-cover rounded"
                 loading="lazy"
               />

@@ -31,7 +31,7 @@ export default function AboutUs() {
               The XR Engineering Club (XREC) is a student-led organization at California State University, Long Beach (CSULB) dedicated to exploring and creating cutting-edge XR (Extended Reality) projects. Our club is a hands-on environment for students interested in both the software and hardware aspects of immersive technologies.
             </p>
             <p className="text-lg text-gray-800">
-              Formerly known as the Virtual Reality Operations Club (VROC), XREC has evolved to encompass a broader range of immersive experiences, while still maintaining our roots in VR. Our mission is to bring together individuals passionate about pushing the boundaries of what's possible in XR development.
+              Formerly known as the Virtual Reality Operations Club (VROC), XREC has evolved to encompass a broader range of immersive experiences, while still maintaining our roots in VR. Our mission is to bring together individuals passionate about pushing the boundaries of what&apos;s possible in XR development.
             </p>
           </motion.section>
 
@@ -103,7 +103,7 @@ export default function AboutUs() {
           >
             <h2 className="text-3xl font-semibold mb-4">Join Us</h2>
             <p className="text-lg text-gray-800 mb-4">
-              Whether you're interested in coding, designing, or working on the hardware side, XREC is open to all students passionate about XR technologies. Come be a part of the future of immersive technology!
+              Whether you&apos;re interested in coding, designing, or working on the hardware side, XREC is open to all students passionate about XR technologies. Come be a part of the future of immersive technology!
             </p>
             <p className="text-lg text-gray-800">
               For more information, feel free to attend a meeting or reach out to us at <a href="mailto:vroc.csulb@gmail.com" className="text-purple-700">vroc.csulb@gmail.com</a>.

@@ -1,6 +1,8 @@
 // app/projects/page.js
 "use client";
+
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const projects = [
   {
@@ -73,9 +75,11 @@ export default function Projects() {
                     loading="lazy"
                   ></video>
                 ) : (
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    width={800}
+                    height={500} // You can adjust the size based on the original image's aspect ratio
                     className="object-cover w-full h-full"
                     loading="lazy"
                   />
