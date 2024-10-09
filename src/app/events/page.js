@@ -24,7 +24,6 @@ export default function Events() {
               <Image
                 src={event.image}
                 alt={event.title}
-                layout="responsive"
                 width={600}
                 height={400}
                 className="w-full h-48 object-cover rounded-t"

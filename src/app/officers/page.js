@@ -66,7 +66,6 @@ export default function Officers() {
               <Image
                 src={officer.image}
                 alt={officer.name}
-                layout="responsive"
                 width={400}  // You can adjust the size
                 height={400} // based on the original image's aspect ratio
                 className="w-full h-64 object-cover rounded"
