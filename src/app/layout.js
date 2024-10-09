@@ -4,9 +4,52 @@ import Footer from './components/Footer';
 
 
 export const metadata = {
-  title: 'XR Engineering Club',
-  description: 'Welcome to the XR Engineering Club website at CSULB',
+  title: 'XR Engineering Club - CSULB',
+  description: 'Welcome to the XR Engineering Club website at CSULB, where we explore AR/VR and engineering innovation.',
+  
+  // Open Graph (OG) meta tags for social media sharing
+  openGraph: {
+    title: 'XR Engineering Club - CSULB',
+    description: 'Join the XR Engineering Club at CSULB, where we dive into AR/VR and engineering.',
+    url: 'https://www.xrengineering.club',
+    type: 'website',
+    images: [
+      {
+        url: '/images/vroc_logo.jpg',
+        width: 800,
+        height: 600,
+        alt: 'XR Engineering Club Logo',
+      },
+    ],
+  },
+
+  // Canonical URL to avoid duplicate content issues
+  alternates: {
+    canonical: 'https://www.xrengineering.club',
+  },
+
+  // Keywords for SEO
+  keywords: ['XR Engineering', 'CSULB', 'AR/VR', 'Engineering Club'],
+
+  // Robots meta tag to control how search engines crawl and index the page
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  // Language and region
+  language: 'en-US',
+  
+  // Author meta tag
+  authors: [{ name: 'XR Engineering Club', url: 'https://www.xrengineering.club' }],
+
+  // Charset meta tag (important for encoding)
+  charset: 'UTF-8',
+
+  // Viewport for responsive web design
+  viewport: 'width=device-width, initial-scale=1.0',
 };
+
 
 export default function RootLayout({ children }) {
   return (
