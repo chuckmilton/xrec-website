@@ -3,6 +3,14 @@ import Image from 'next/image';
 
 const events = [
   {
+    "date": "Nov. 4, 2024",
+    "time": "5:00 PM",
+    "title": "VR Club Project Kick-Off & Unity Prep Session",
+    "description": "Join us on Discord as we kick off our VR Club projects! Be sure to check in with your project lead if you haven’t already and watch the tutorial video in resources to get familiar with Unity. 🎥✨\n\nCome prepared with project ideas so you can dive right into your work.",
+    "location": "Online (Discord)",
+    "image": "/images/event2.png"
+  },
+  {
     date: 'Oct. 14, 2024',
     time: '5:00 PM',
     title: 'Join the Fun: Unity, GitHub & Quest 3 Demos',
