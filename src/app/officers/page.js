@@ -20,18 +20,18 @@ const officers = [
     linkedin: 'https://www.linkedin.com/in/antonkatona/'
   },
   {
-    name: 'Russell Harral',
-    role: 'Assistant Project Manager',
-    email: 'russellharral4@gmail.com',
-    image: '/images/russell.jpg',
-    linkedin: 'https://www.linkedin.com/in/russell-harral-75a30720b/'
-  },
-  {
     name: 'Yunis Nabiyev',
     role: 'Project Manager',
     email: 'yunisnabiyev@gmail.com',
     image: '/images/yunis.jpg',
     linkedin: 'https://www.linkedin.com/in/yunisn/'
+  },
+  {
+    name: 'Russell Harral',
+    role: 'Assistant Project Manager',
+    email: 'russellharral4@gmail.com',
+    image: '/images/russell.jpg',
+    linkedin: 'https://www.linkedin.com/in/russell-harral-75a30720b/'
   },
   {
     name: 'Charles Milton',
