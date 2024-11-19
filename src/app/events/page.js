@@ -3,6 +3,14 @@ import Image from 'next/image';
 
 const events = [
   {
+    "date": "Nov. 22, 2024",
+    "time": "4:00 PM",
+    "title": "Drone ESC Soldering Workshop",
+    "description": "Join us this Wednesday as we solder the Drone's ESC components! Soldering irons and FC Practice Boards will be provided so everyone can practice and perfect their soldering skills before working on the ESC together. We'll also cover how the FC and ESC work with their connections and roles in the Drone. 🎯\n\nAfter break, we'll have a meeting on BetaFlight to get the Drone flying!",
+    "location": "University Library - Lower Level Room 005 (iSpace)",
+    "image": "/images/solder.png"
+  },  
+  {
     "date": "Nov. 4, 2024",
     "time": "5:00 PM",
     "title": "VR Club Project Kick-Off & Unity Prep Session",
