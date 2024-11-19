@@ -24,7 +24,7 @@ const events = [
     title: 'Join the Fun: Unity, GitHub & Quest 3 Demos',
     description: `We’ll dive into installing Unity, mastering GitHub, and collaborating on exciting new ideas. Plus, we’ll have multiple Quest 3 headsets ready for demo, so be sure to bring your laptops and join the fun!\nLet’s brainstorm, create, and explore together! 🚀`,
     location: 'University Library - Lower Level Room 005',
-    image: '/images/gbm2.png',
+    image: '/images/official_meeting.png',
   },
   // Add more events as needed
 ]
