@@ -10,12 +10,20 @@ export default function AboutUs() {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+  const images = [
+    { src: '/images/group.jpeg', alt: 'XREC Group Photo' },
+    { src: '/images/gbm2.png', alt: 'General Body Meeting Photo' },
+    { src: '/images/wow.png', alt: 'Week of Welcome Photo' },
+    { src: '/images/gbm.png', alt: 'General Body Meeting Photo' },
+    { src: '/images/ispacebg.jpg', alt: 'iSpace Photo' },
+    { src: '/images/presentation.png', alt: 'Presentation Photo' },
+  ];
 
   return (
     <div>
-      <main className="p-8 text-gray-900">
+      <main className="p-8 text-xrpink">
         <h1 className="text-5xl font-semibold mb-8 text-beige">About Us</h1>
-        <div className="bg-beige p-6 rounded max-w-100">
+        <div className="p-6 rounded max-w-100">
           
           {/* Who We Are Section */}
           <motion.section 
@@ -27,32 +35,46 @@ export default function AboutUs() {
             variants={fadeInUp}
           >
             <h2 className="text-3xl font-semibold mb-4">Who We Are</h2>
-            <p className="text-lg text-gray-800 mb-4">
+            <p className="text-lg text-beige mb-4">
               The XR Engineering Club (XREC) is a student-led organization at California State University, Long Beach (CSULB) dedicated to exploring and creating cutting-edge XR (Extended Reality) projects. Our club is a hands-on environment for students interested in both the software and hardware aspects of immersive technologies.
             </p>
-            <p className="text-lg text-gray-800">
+            <p className="text-lg text-beige">
               Formerly known as the Virtual Reality Operations Club (VROC), XREC has evolved to encompass a broader range of immersive experiences, while still maintaining our roots in VR. Our mission is to bring together individuals passionate about pushing the boundaries of what&apos;s possible in XR development.
             </p>
           </motion.section>
 
           {/* Group Photo Section */}
-          <motion.section 
-            className="mb-10"
+          <motion.section
+            className="mb-10 overflow-hidden w-full"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
             variants={fadeInUp}
           >
-            <h2 className="text-3xl font-semibold mb-4">Meet the Team</h2>
-            <div className="w-full flex justify-center mb-8">
-              <Image 
-                src="/images/group.jpeg"
-                alt="XREC Group Photo"
-                width={800}
-                height={500}
-                className="rounded shadow-lg"
-              />
+            <div className="relative flex w-full overflow-hidden">
+              <motion.div
+                className="flex gap-4"
+                initial={{ x: 0 }}
+                animate={{ x: '-100%' }}
+                transition={{
+                  duration: 30,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                {/* Duplicate the image set to create a seamless loop */}
+                {[...images, ...images].map((image, index) => (
+                  <Image
+                    key={index}
+                    src={image.src}
+                    alt={image.alt}
+                    width={300}
+                    height={200}
+                    className="rounded shadow-md object-cover"
+                  />
+                ))}
+              </motion.div>
             </div>
           </motion.section>
 
@@ -66,10 +88,10 @@ export default function AboutUs() {
             variants={fadeInUp}
           >
             <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
-            <p className="text-lg text-gray-800 mb-4">
+            <p className="text-lg text-beige mb-4">
               XREC aims to be the premier hub for XR innovation at CSULB. Our mission is to equip students with the technical knowledge and skills necessary to excel in the fast-growing field of immersive technology. We provide opportunities for students to collaborate on projects that integrate both software and hardware solutions.
             </p>
-            <p className="text-lg text-gray-800">
+            <p className="text-lg text-beige">
               By fostering a culture of learning and experimentation, we strive to create experiences that are not only visually stunning but also groundbreaking in their use of XR technologies.
             </p>
           </motion.section>
@@ -84,7 +106,7 @@ export default function AboutUs() {
             variants={fadeInUp}
           >
             <h2 className="text-3xl font-semibold mb-4">What We Do</h2>
-            <ul className="list-disc ml-5 text-lg text-gray-800">
+            <ul className="list-disc ml-5 text-lg text-beige">
               <li className="mb-2">Design and develop XR applications using tools like Unity.</li>
               <li className="mb-2">Work with a wide array of XR hardware.</li>
               <li className="mb-2">Host workshops to encourage creative solutions in XR technologies.</li>
@@ -102,11 +124,11 @@ export default function AboutUs() {
             variants={fadeInUp}
           >
             <h2 className="text-3xl font-semibold mb-4">Join Us</h2>
-            <p className="text-lg text-gray-800 mb-4">
+            <p className="text-lg text-beige mb-4">
               Whether you&apos;re interested in coding, designing, or working on the hardware side, XREC is open to all students passionate about XR technologies. Come be a part of the future of immersive technology!
             </p>
-            <p className="text-lg text-gray-800">
-              For more information, feel free to attend a meeting or reach out to us at <a href="mailto:vroc.csulb@gmail.com" className="text-purple-700">vroc.csulb@gmail.com</a>.
+            <p className="text-lg text-beige">
+              For more information, feel free to attend a meeting or reach out to us at <a href="mailto:vroc.csulb@gmail.com" className="text-pink-400 font-semibold">vroc.csulb@gmail.com</a>.
             </p>
           </motion.section>
         </div>
