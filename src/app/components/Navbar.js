@@ -2,31 +2,29 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   const linkClasses = (path) =>
-    router.pathname === path ? 'underline' : 'hover:underline';
+    pathname === path ? 'underline' : 'hover:underline';
 
   return (
     <nav className="bg-foreground p-2">
       <div className="flex justify-between items-center font-semibold mx-2">
         {/* Logo */}
         <Link href="/">
-        <div className='w-14 h-14 md:w-16 md:h-16 text-beige flex items-center space-x-2'>
-        <img
-            src="/images/vroc_logo.png"
-            alt="VROC Logo"
-            className="rounded-full"
-          />
-           <h1 className='text-sm md:text-base whitespace-nowrap'>XREC @ CSULB</h1>
-        </div>
-          
+          <div className="w-14 h-14 md:w-16 md:h-16 text-beige flex items-center space-x-2">
+            <img
+              src="/images/vroc_logo.png"
+              alt="VROC Logo"
+              className="rounded-full"
+            />
+            <h1 className="text-sm md:text-base whitespace-nowrap">XREC @ CSULB</h1>
+          </div>
         </Link>
-       
 
         {/* Hamburger menu button for mobile */}
         <div className="md:hidden">

@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    images: {
+      domains: [process.env.SUPABASE_URL],
+    },
+  };
+  
+  export default nextConfig;
+  

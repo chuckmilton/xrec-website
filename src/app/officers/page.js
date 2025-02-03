@@ -1,55 +1,35 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
-
-const officers = [
-  {
-    name: 'Diego Davalos',
-    role: 'President, Hardware Lead',
-    email: 'diegodavalos234@gmail.com',
-    image: '/images/diego.png',
-    linkedin: 'https://www.linkedin.com/in/diego-davalos-5aa2b2234/',
-  },
-  {
-    name: 'Anton Katona',
-    role: 'Vice President, Software Lead',
-    email: 'antonjkatona@gmail.com',
-    image: '/images/anton.jpeg',
-    linkedin: 'https://www.linkedin.com/in/antonkatona/'
-  },
-  {
-    name: 'Yunis Nabiyev',
-    role: 'Project Manager',
-    email: 'yunisnabiyev@gmail.com',
-    image: '/images/yunis.jpg',
-    linkedin: 'https://www.linkedin.com/in/yunisn/'
-  },
-  {
-    name: 'Russell Harral',
-    role: 'Assistant Project Manager',
-    email: 'russellharral4@gmail.com',
-    image: '/images/russell.jpg',
-    linkedin: 'https://www.linkedin.com/in/russell-harral-75a30720b/'
-  },
-  {
-    name: 'Charles Milton',
-    role: 'Web Developer',
-    email: 'chuckmilton123@gmail.com',
-    image: '/images/charles.png',
-    linkedin: 'https://www.linkedin.com/in/charles-milton-0b679427b/'
-  },
-  // Add more officers as needed
-];
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { FaEnvelope, FaLinkedin } from "react-icons/fa";
+import { supabase } from "../utils/supabaseClient";
 
 export default function Officers() {
+  const [officers, setOfficers] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Trigger the animation on component mount
   useEffect(() => {
-    setIsVisible(true);
+    async function fetchOfficers() {
+      const { data, error } = await supabase
+        .from("officers")
+        .select("*")
+        .order("id", { ascending: true });
+      if (error) {
+        console.error("Error fetching officers:", error);
+      } else {
+        setOfficers(data);
+      }
+    }
+    fetchOfficers();
   }, []);
+
+  // Trigger the animation after officers have been loaded.
+  useEffect(() => {
+    if (officers.length > 0) {
+      setIsVisible(true);
+    }
+  }, [officers]);
 
   return (
     <div>
@@ -59,15 +39,16 @@ export default function Officers() {
           {officers.map((officer, index) => (
             <div
               key={index}
-              className={`bg-beige p-6 rounded shadow overflow-hidden transform transition-all duration-700 ease-out 
-              ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-[-100%]'}`}
-              style={{ transitionDelay: `${index * 0.2}s` }} // Add a slight delay between each card animation
+              className={`bg-beige p-6 rounded shadow overflow-hidden transform transition-all duration-700 ease-out ${
+                isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-100%]"
+              }`}
+              style={{ transitionDelay: `${index * 0.2}s` }} // Slight delay between each card
             >
               <Image
                 src={officer.image}
                 alt={officer.name}
-                width={400}  // You can adjust the size
-                height={400} // based on the original image's aspect ratio
+                width={600}
+                height={400}
                 className="w-full h-64 object-cover rounded"
                 loading="lazy"
               />

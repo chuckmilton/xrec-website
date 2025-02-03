@@ -1,3 +1,5 @@
+"use client";
+
 import { FaInstagram, FaEnvelope, FaDiscord } from 'react-icons/fa';
 
 export default function Footer() {
@@ -10,7 +12,12 @@ export default function Footer() {
         
         <div className="flex space-x-4 mt-4 md:mt-0">
           {/* Instagram */}
-          <a href="https://www.instagram.com/vrcsulb?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <a
+            href="https://www.instagram.com/vrcsulb?igsh=MzRlODBiNWFlZA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-400"
+          >
             <FaInstagram className="w-6 h-6" />
           </a>
           
@@ -20,7 +27,12 @@ export default function Footer() {
           </a>
           
           {/* Discord */}
-          <a href="https://discord.gg/NeQAnJeFNT" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <a
+            href="https://discord.gg/NeQAnJeFNT"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-400"
+          >
             <FaDiscord className="w-6 h-6" />
           </a>
         </div>

@@ -17,11 +17,16 @@ export default function AboutUs() {
     { src: '/images/gbm.png', alt: 'General Body Meeting Photo' },
     { src: '/images/ispacebg.jpg', alt: 'iSpace Photo' },
     { src: '/images/presentation.png', alt: 'Presentation Photo' },
+    { src: '/images/drone_diego4.jpg', alt: 'Diego working on Drone Photo' },
+    { src: '/images/drone_group.jpg', alt: 'Drone Workshop Photo' },
+    { src: '/images/drone_group2.jpg', alt: 'Drone Workshop Photo' },
+    { src: '/images/drone_group3.jpg', alt: 'Drone Workshop Photo' },
+    { src: '/images/droneimg.jpg', alt: 'Drone Photo' },
   ];
 
   return (
     <div>
-      <main className="p-8 text-xrpink">
+      <main className="p-8 text-beige">
         <h1 className="text-5xl font-semibold mb-8 text-beige">About Us</h1>
         <div className="p-6 rounded max-w-100">
           
@@ -56,7 +61,7 @@ export default function AboutUs() {
               <motion.div
                 className="flex gap-4"
                 initial={{ x: 0 }}
-                animate={{ x: '-100%' }}
+                animate={{ x: '-150%' }}
                 transition={{
                   duration: 30,
                   repeat: Infinity,
