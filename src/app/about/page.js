@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image'; // If using Next.js Image component
-import { motion } from 'framer-motion'; // Import Framer Motion
+import Image from 'next/image'; // Next.js Image component
+import { motion } from 'framer-motion'; // Framer Motion
 
 export default function AboutUs() {
   // Variants for the scroll animation (for other sections)
@@ -24,6 +24,9 @@ export default function AboutUs() {
     { src: '/images/drone_group3.jpg', alt: 'Drone Workshop Photo' },
     { src: '/images/droneimg.jpg', alt: 'Drone Photo' },
   ];
+
+  // Duplicate the images array to ensure a larger scrollable width.
+  const duplicatedImages = [...images, ...images];
 
   // Reference to the carousel container to measure its scroll width.
   const carouselRef = useRef(null);
@@ -75,7 +78,7 @@ export default function AboutUs() {
             transition={{ duration: 0.6 }}
             variants={fadeInUp}
           >
-            {/* The container below will hide overflow and is used for measuring constraints */}
+            {/* Container for measuring constraints */}
             <div ref={carouselRef} className="relative flex w-full overflow-hidden cursor-grab">
               <motion.div
                 className="flex gap-4"
@@ -84,13 +87,12 @@ export default function AboutUs() {
                 whileTap={{ cursor: 'grabbing' }}
                 initial={{ x: 0 }}
               >
-                {/* Render each image (you can duplicate if desired) */}
-                {images.map((image, index) => (
+                {duplicatedImages.map((image, index) => (
                   <Image
                     key={index}
                     src={image.src}
                     alt={image.alt}
-                    draggable={false}
+                    draggable={false} // Prevent default browser image dragging
                     width={300}
                     height={200}
                     className="rounded shadow-md object-cover"
