@@ -148,6 +148,8 @@ export default function AdminEventsPage() {
   const handleEdit = (eventItem) => {
     setForm(eventItem);
     setEditingEvent(eventItem);
+    // Scroll to the top where the form is located
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id) => {

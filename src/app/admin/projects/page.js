@@ -189,6 +189,8 @@ export default function AdminProjectsPage() {
   const handleEdit = (project) => {
     setForm(project);
     setEditingProject(project);
+    // Scroll to the top where the form is located
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id) => {
