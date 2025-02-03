@@ -88,15 +88,16 @@ export default function AboutUs() {
                 initial={{ x: 0 }}
               >
                 {duplicatedImages.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image.src}
-                    alt={image.alt}
-                    draggable={false} // Prevent default browser image dragging
-                    width={300}
-                    height={200}
-                    className="rounded shadow-md object-cover"
-                  />
+                  // Wrap each image in a container with fixed width and height.
+                  <div key={index} className="relative flex-shrink-0 w-[300px] h-[200px]">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      draggable={false} // Prevent default browser image dragging
+                      fill
+                      className="rounded shadow-md object-cover"
+                    />
+                  </div>
                 ))}
               </motion.div>
             </div>
@@ -152,7 +153,10 @@ export default function AboutUs() {
               Whether you&apos;re interested in coding, designing, or working on the hardware side, XREC is open to all students passionate about XR technologies. Come be a part of the future of immersive technology!
             </p>
             <p className="text-lg text-beige">
-              For more information, feel free to attend a meeting or reach out to us at <a href="mailto:vroc.csulb@gmail.com" className="text-pink-400 font-semibold">vroc.csulb@gmail.com</a>.
+              For more information, feel free to attend a meeting or reach out to us at{' '}
+              <a href="mailto:vroc.csulb@gmail.com" className="text-pink-400 font-semibold">
+                vroc.csulb@gmail.com
+              </a>.
             </p>
           </motion.section>
         </div>
