@@ -54,7 +54,7 @@ const ProjectCard = ({ project, index, isVisible }) => (
 
     {/* Description Section */}
     <div
-      className="text-gray-900 w-full md:w-1/2 p-2 md: p-8 bg-beige transition-transform duration-500 opacity-100 md:opacity-0 group-focus:opacity-100 md:group-focus:translate-x-[50%] md:absolute overflow-y-auto flex flex-col items-center justify-start xl:justify-center"
+      className="text-gray-900 w-full md:w-1/2 p-2 md:p-8 bg-beige transition-transform duration-500 opacity-100 md:opacity-0 group-focus:opacity-100 md:group-focus:translate-x-[50%] md:absolute overflow-y-auto flex flex-col items-center justify-start xl:justify-center"
       style={{
         zIndex: 2,
         height: "100%",
