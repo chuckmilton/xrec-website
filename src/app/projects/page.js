@@ -63,7 +63,7 @@ const ProjectCard = ({ project, index, isVisible }) => (
       }}
     >
       <h3 className="text-3xl font-semibold text-center">{project.title}</h3>
-      <p className="mt-4 mx-4 text-center">{project.description}</p>
+      <p className="mt-4 mx-4 text-center pb-8 md:pb-0">{project.description}</p>
     </div>
   </div>
 );
