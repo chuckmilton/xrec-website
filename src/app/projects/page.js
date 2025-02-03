@@ -7,19 +7,18 @@ import { supabase } from "../utils/supabaseClient";
 const ProjectCard = ({ project, index, isVisible }) => (
   <div
     tabIndex={0} // Make this element focusable
-    className={`rounded relative group flex flex-col md:flex-row justify-center items-center w-full bg-transparent p-0 md:p-0 overflow-hidden transition-all duration-700 ease-out cursor-pointer transform ${
+    className={`rounded relative group flex flex-col md:flex-row justify-center items-center w-full max-w-md md:max-w-full mx-auto bg-transparent overflow-hidden transition-all duration-700 ease-out cursor-pointer transform ${
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
     }`}
+    // Remove the fixed minHeight on mobile; use padding/margins to control spacing
     style={{
-      minHeight: "300px",
       transitionDelay: `${index * 0.3}s`, // Staggered delay for fade-in effect
     }}
   >
     {/* Image/Video Container */}
     <div
-      className="relative w-full md:w-1/2 h-64 md:h-auto transition-transform duration-500 group-focus:translate-x-0 md:group-focus:translate-x-[-50%]"
+      className="relative w-full md:w-1/2 aspect-video md:aspect-auto transition-transform duration-500 group-focus:translate-x-0 md:group-focus:translate-x-[-50%]"
       style={{
-        height: "100%",
         zIndex: 3,
       }}
     >
@@ -55,10 +54,10 @@ const ProjectCard = ({ project, index, isVisible }) => (
 
     {/* Description Section */}
     <div
-      className="text-gray-900 w-full md:w-1/2 h-full p-8 md:p-12 bg-beige transition-transform duration-500 opacity-100 md:opacity-0 group-focus:opacity-100 md:group-focus:translate-x-[50%] md:absolute overflow-y-auto flex flex-col items-center justify-start xl:justify-center"
+      className="text-gray-900 w-full md:w-1/2 p-2 md: p-8 bg-beige transition-transform duration-500 opacity-100 md:opacity-0 group-focus:opacity-100 md:group-focus:translate-x-[50%] md:absolute overflow-y-auto flex flex-col items-center justify-start xl:justify-center"
       style={{
         zIndex: 2,
-        maxHeight: "100%",
+        height: "100%",
         paddingTop: "2rem",
         transition: "opacity 0.5s ease, transform 0.5s ease",
       }}
