@@ -1,15 +1,16 @@
-// app/about/page.js
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'; // If using Next.js Image component
 import { motion } from 'framer-motion'; // Import Framer Motion
 
 export default function AboutUs() {
-  // Variants for the scroll animation
+  // Variants for the scroll animation (for other sections)
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
   const images = [
     { src: '/images/group.jpeg', alt: 'XREC Group Photo' },
     { src: '/images/gbm2.png', alt: 'General Body Meeting Photo' },
@@ -24,12 +25,29 @@ export default function AboutUs() {
     { src: '/images/droneimg.jpg', alt: 'Drone Photo' },
   ];
 
+  // Reference to the carousel container to measure its scroll width.
+  const carouselRef = useRef(null);
+  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+
+  useEffect(() => {
+    function updateConstraints() {
+      if (carouselRef.current) {
+        // Calculate the difference between the total scroll width and the visible width.
+        const scrollWidth = carouselRef.current.scrollWidth;
+        const offsetWidth = carouselRef.current.offsetWidth;
+        setDragConstraints({ left: -(scrollWidth - offsetWidth), right: 0 });
+      }
+    }
+    updateConstraints();
+    window.addEventListener('resize', updateConstraints);
+    return () => window.removeEventListener('resize', updateConstraints);
+  }, []);
+
   return (
     <div>
       <main className="p-8 text-beige">
         <h1 className="text-5xl font-semibold mb-8 text-beige">About Us</h1>
         <div className="p-6 rounded max-w-100">
-          
           {/* Who We Are Section */}
           <motion.section 
             className="mb-10"
@@ -48,7 +66,7 @@ export default function AboutUs() {
             </p>
           </motion.section>
 
-          {/* Group Photo Section */}
+          {/* Group Photo Section (Draggable Carousel) */}
           <motion.section
             className="mb-10 overflow-hidden w-full"
             initial="hidden"
@@ -57,23 +75,22 @@ export default function AboutUs() {
             transition={{ duration: 0.6 }}
             variants={fadeInUp}
           >
-            <div className="relative flex w-full overflow-hidden">
+            {/* The container below will hide overflow and is used for measuring constraints */}
+            <div ref={carouselRef} className="relative flex w-full overflow-hidden cursor-grab">
               <motion.div
                 className="flex gap-4"
+                drag="x"
+                dragConstraints={dragConstraints}
+                whileTap={{ cursor: 'grabbing' }}
                 initial={{ x: 0 }}
-                animate={{ x: '-150%' }}
-                transition={{
-                  duration: 30,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
               >
-                {/* Duplicate the image set to create a seamless loop */}
-                {[...images, ...images].map((image, index) => (
+                {/* Render each image (you can duplicate if desired) */}
+                {images.map((image, index) => (
                   <Image
                     key={index}
                     src={image.src}
                     alt={image.alt}
+                    draggable={false}
                     width={300}
                     height={200}
                     className="rounded shadow-md object-cover"
