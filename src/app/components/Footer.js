@@ -1,6 +1,6 @@
 "use client";
 
-import { FaInstagram, FaEnvelope, FaDiscord } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaDiscord, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,11 +21,6 @@ export default function Footer() {
             <FaInstagram className="w-6 h-6" />
           </a>
           
-          {/* Email */}
-          <a href="mailto:vroc.csulb@gmail.com" className="hover:text-gray-400">
-            <FaEnvelope className="w-6 h-6" />
-          </a>
-          
           {/* Discord */}
           <a
             href="https://discord.gg/NeQAnJeFNT"
@@ -35,6 +30,21 @@ export default function Footer() {
           >
             <FaDiscord className="w-6 h-6" />
           </a>
+
+          <a
+            href="https://www.linkedin.com/company/xr-engineering-club/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-400"
+          >
+            <FaLinkedin className="w-6 h-6" />
+          </a>
+          
+          {/* Email */}
+          <a href="mailto:vroc.csulb@gmail.com" className="hover:text-gray-400">
+            <FaEnvelope className="w-6 h-6" />
+          </a>
+          
         </div>
       </div>
     </footer>
