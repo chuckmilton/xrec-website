@@ -27,7 +27,7 @@ export default function Navbar() {
         </Link>
 
         {/* Hamburger menu button for mobile */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="focus:outline-none"
@@ -50,7 +50,7 @@ export default function Navbar() {
         </div>
 
         {/* Full menu for larger screens */}
-        <ul className="hidden md:flex space-x-8 text-beige">
+        <ul className="hidden lg:flex space-x-8 text-beige">
           <li>
             <Link href="/" className={linkClasses('/')}>
               Home
@@ -79,6 +79,15 @@ export default function Navbar() {
           <li>
             <Link href="/contact" className={linkClasses('/contact')}>
               Contact
+            </Link>
+          </li>
+          {/* Distinct Admin Login button */}
+          <li>
+            <Link
+              href="/admin/login"
+              className="bg-purple-400 text-white px-3 py-2 rounded hover:bg-purple-500"
+            >
+              Admin Login
             </Link>
           </li>
         </ul>
@@ -87,10 +96,10 @@ export default function Navbar() {
       {/* Mobile menu with slide-down transition */}
       <div
         className={`transition-all duration-300 ease-in-out overflow-hidden ${
-          menuOpen ? 'max-h-96' : 'max-h-0'
+          menuOpen ? 'max-h-screen' : 'max-h-0'
         }`}
       >
-        <ul className="mt-4 space-y-4 md:hidden text-beige font-semibold">
+        <ul className="mt-4 space-y-4 lg:hidden text-beige font-semibold pb-4">
           <li>
             <Link href="/" className={linkClasses('/')}>
               Home
@@ -119,6 +128,15 @@ export default function Navbar() {
           <li>
             <Link href="/contact" className={linkClasses('/contact')}>
               Contact
+            </Link>
+          </li>
+          {/* Distinct Admin Login button */}
+          <li>
+            <Link
+              href="/admin/login"
+              className="bg-purple-400 text-white px-3 py-2 rounded hover:bg-purple-500"
+            >
+              Admin Login
             </Link>
           </li>
         </ul>
