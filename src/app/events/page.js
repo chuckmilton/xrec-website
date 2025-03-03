@@ -4,6 +4,67 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "../utils/supabaseClient";
 
+// Converts a 12-hour time string (e.g. "2:30PM" or "2:30 PM") to 24-hour time (HH:MM).
+function convertTo24Hour(timeStr) {
+  const regex = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
+  const match = timeStr.match(regex);
+  if (match) {
+    let [, hours, minutes, modifier] = match;
+    hours = parseInt(hours, 10);
+    if (modifier.toUpperCase() === "PM" && hours !== 12) {
+      hours += 12;
+    }
+    if (modifier.toUpperCase() === "AM" && hours === 12) {
+      hours = 0;
+    }
+    return `${hours.toString().padStart(2, "0")}:${minutes}`;
+  }
+  return timeStr;
+}
+
+// Generates a Google Calendar event URL for the given event.
+function getGoogleCalendarLink(event) {
+  const dateParts = event.date.split("/");
+  if (dateParts.length !== 3) {
+    console.error("Invalid date format. Expected mm/dd/yyyy", event.date);
+    return "#";
+  }
+  const [month, day, year] = dateParts;
+  const isoDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+  let timeString = event.time;
+  if (
+    timeString.toUpperCase().includes("AM") ||
+    timeString.toUpperCase().includes("PM")
+  ) {
+    timeString = convertTo24Hour(timeString);
+  }
+  
+  // Build a datetime string in ISO format.
+  const dateTimeStr = `${isoDate}T${timeString}:00`;
+  let startDateTime = new Date(dateTimeStr);
+  if (isNaN(startDateTime.getTime())) {
+    console.error("Invalid date/time for event:", event);
+    startDateTime = new Date();
+  }
+  
+  // End time is set to 1 hour later.
+  const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
+
+  // Helper to format the date for Google Calendar.
+  function formatDate(date) {
+    return date.toISOString().replace(/[-:]|\.\d{3}/g, '');
+  }
+  
+  const formattedStart = formatDate(startDateTime);
+  const formattedEnd = formatDate(endDateTime);
+  const title = encodeURIComponent(event.title);
+  const details = encodeURIComponent(event.description);
+  const location = encodeURIComponent(event.location);
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${formattedStart}/${formattedEnd}&details=${details}&location=${location}&sf=true&output=xml`;
+}
+
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +110,6 @@ export default function Events() {
               style={{ transitionDelay: `${index * 0.2}s` }}
             >
               {event.image && (
-                // For debugging, you can try switching to a plain <img> tag:
                 <Image
                   loader={({ src }) => src}
                   unoptimized
@@ -60,12 +120,6 @@ export default function Events() {
                   className="w-full h-48 object-cover rounded-t"
                   loading="lazy"
                 />
-                // Or, try this:
-                // <img
-                //   src={event.image}
-                //   alt={event.title}
-                //   style={{ width: "600px", height: "400px", objectFit: "cover" }}
-                // />
               )}
               <div className="p-4 flex-grow flex flex-col">
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
@@ -81,6 +135,16 @@ export default function Events() {
                   <p className="text-gray-600">Date: {event.date}</p>
                   <p className="text-gray-600">Time: {event.time}</p>
                   <p className="text-gray-600">Location: {event.location}</p>
+                </div>
+                <div className="mt-4">
+                  <a
+                    href={getGoogleCalendarLink(event)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+                  >
+                    Add to Google Calendar
+                  </a>
                 </div>
               </div>
             </div>

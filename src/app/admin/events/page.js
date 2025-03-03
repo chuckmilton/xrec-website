@@ -1,7 +1,120 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { supabase } from "../../utils/supabaseClient";
+
+// Converts a military time string (HH:MM) to a 12-hour time string with AM/PM.
+function convertMilitaryTo12(timeStr) {
+  const [hourStr, minute] = timeStr.split(":");
+  let hour = parseInt(hourStr, 10);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  hour = hour % 12;
+  if (hour === 0) hour = 12;
+  return `${hour}:${minute}${ampm}`;
+}
+
+// Converts a 12-hour time string (e.g. "2:30PM" or "2:30 PM") to 24-hour time (HH:MM).
+function convertTo24Hour(timeStr) {
+  const regex = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
+  const match = timeStr.match(regex);
+  if (match) {
+    let [, hours, minutes, modifier] = match;
+    hours = parseInt(hours, 10);
+    if (modifier.toUpperCase() === "PM" && hours !== 12) {
+      hours += 12;
+    }
+    if (modifier.toUpperCase() === "AM" && hours === 12) {
+      hours = 0;
+    }
+    return `${hours.toString().padStart(2, "0")}:${minutes}`;
+  }
+  // Fallback: if it doesn't match, assume it's already in 24-hour format.
+  return timeStr;
+}
+
+// Converts a date from "mm/dd/yyyy" to "yyyy-mm-dd" (for input fields).
+function convertDateForInput(dateStr) {
+  const parts = dateStr.split("/");
+  if (parts.length !== 3) return dateStr;
+  const [month, day, year] = parts;
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
+
+// Format the form data before sending to Supabase.
+// Converts date from "yyyy-mm-dd" (input format) to "mm/dd/yyyy" and time from 24-hour to 12-hour.
+function formatFormData(form) {
+  // Convert date.
+  const [year, month, day] = form.date.split("-");
+  const formattedDate = `${month}/${day}/${year}`;
+  // Convert time.
+  const formattedTime = convertMilitaryTo12(form.time);
+  return { ...form, date: formattedDate, time: formattedTime };
+}
+
+// Helper function to generate Google Calendar event URL.
+// Expects event.date in "mm/dd/yyyy" and event.time in "h:mm AM/PM".
+function getGoogleCalendarLink(event) {
+  // Split the date.
+  const dateParts = event.date.split("/");
+  if (dateParts.length !== 3) {
+    console.error("Invalid date format. Expected mm/dd/yyyy", event.date);
+    return "#";
+  }
+  const [month, day, year] = dateParts;
+  // Rearrange into ISO date format: yyyy-mm-dd.
+  const isoDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+  // Convert the stored 12-hour time into 24-hour.
+  let timeString = event.time;
+  if (
+    timeString.toUpperCase().includes("AM") ||
+    timeString.toUpperCase().includes("PM")
+  ) {
+    timeString = convertTo24Hour(timeString);
+  }
+  
+  // Build a string that can be parsed by Date.
+  const dateTimeStr = `${isoDate}T${timeString}:00`;
+  let startDateTime = new Date(dateTimeStr);
+  if (isNaN(startDateTime.getTime())) {
+    console.error("Invalid date/time for event:", event);
+    startDateTime = new Date();
+  }
+  
+  // End time: 1 hour later.
+  const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
+  
+  // Format the dates for Google Calendar (YYYYMMDDTHHmmssZ).
+  function formatDate(date) {
+    return date.toISOString().replace(/[-:]|\.\d{3}/g, '');
+  }
+  
+  const formattedStart = formatDate(startDateTime);
+  const formattedEnd = formatDate(endDateTime);
+  const title = encodeURIComponent(event.title);
+  const details = encodeURIComponent(event.description);
+  const location = encodeURIComponent(event.location);
+  
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${formattedStart}/${formattedEnd}&details=${details}&location=${location}&sf=true&output=xml`;
+}
+
+// Helper to format date/time for display in the event list.
+// Expects date in "yyyy-mm-dd" and time in "HH:MM" (24-hour).
+const formatDateTime = (dateStr, timeStr) => {
+  const dateObj = new Date(`${dateStr}T${timeStr}`);
+  if (isNaN(dateObj.getTime())) return "";
+  const formattedDate = dateObj.toLocaleDateString("en-US"); // mm/dd/yyyy
+  // Use a regex that removes the space between minutes and the AM/PM indicator.
+  const formattedTime = dateObj
+    .toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(/(\d+:\d+)\s+(AM|PM)/, "$1$2");
+  return `${formattedDate} at ${formattedTime}`;
+};
 
 export default function AdminEventsPage() {
   const [events, setEvents] = useState([]);
@@ -25,11 +138,11 @@ export default function AdminEventsPage() {
       if (!session) window.location.href = "/admin/login";
     }
     checkSession();
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (!session) window.location.href = "/admin/login";
-      }
-    );
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) window.location.href = "/admin/login";
+    });
     return () => subscription.unsubscribe();
   }, []);
 
@@ -51,12 +164,10 @@ export default function AdminEventsPage() {
   };
 
   // Helper: Extract file name from the public URL.
-  // Expected URL: https://<project_id>.supabase.co/storage/v1/object/public/event-images/<fileName>
   const getFileNameFromUrl = (url) => {
     if (!url) return null;
     const parts = url.split("/public/");
     if (parts.length < 2) return null;
-    // parts[1] should be "event-images/<fileName>"
     const path = parts[1];
     const bucketPrefix = "event-images/";
     if (path.startsWith(bucketPrefix)) {
@@ -75,10 +186,9 @@ export default function AdminEventsPage() {
     if (!file) return;
     setUploading(true);
 
-    // Create a unique file name.
     const fileExt = file.name.split(".").pop();
     const fileName = `${Date.now()}.${fileExt}`;
-    const filePath = fileName; // No folder prefix used
+    const filePath = fileName; 
     const { error } = await supabase.storage
       .from("event-images")
       .upload(filePath, file, { upsert: true, contentType: file.type });
@@ -97,7 +207,6 @@ export default function AdminEventsPage() {
       console.error("Error getting public URL:", publicUrlError.message);
     } else if (data && data.publicUrl) {
       let fixedUrl = data.publicUrl;
-      // Fix URL if it starts with "https:/" (one slash) instead of "https://"
       if (fixedUrl.startsWith("https:/") && !fixedUrl.startsWith("https://")) {
         fixedUrl = fixedUrl.replace("https:/", "https://");
       }
@@ -126,18 +235,18 @@ export default function AdminEventsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formattedForm = formatFormData(form);
     if (editingEvent) {
-      // If updating and a new image was uploaded, delete the previous file.
-      if (editingEvent.image && editingEvent.image !== form.image) {
+      if (editingEvent.image && editingEvent.image !== formattedForm.image) {
         await deleteFileFromStorage(editingEvent.image);
       }
       const { error } = await supabase
         .from("events")
-        .update(form)
+        .update(formattedForm)
         .eq("id", editingEvent.id);
       if (error) console.error("Update error:", error);
     } else {
-      const { error } = await supabase.from("events").insert(form);
+      const { error } = await supabase.from("events").insert(formattedForm);
       if (error) console.error("Insert error:", error);
     }
     setForm({ title: "", description: "", date: "", time: "", location: "", image: "" });
@@ -145,15 +254,20 @@ export default function AdminEventsPage() {
     fetchEvents();
   };
 
+  // When editing, convert stored "mm/dd/yyyy" date to "yyyy-mm-dd" and 12-hour time to 24-hour.
   const handleEdit = (eventItem) => {
-    setForm(eventItem);
+    const formattedDateForInput = convertDateForInput(eventItem.date);
+    const formattedTimeForInput =
+      eventItem.time.toUpperCase().includes("AM") ||
+      eventItem.time.toUpperCase().includes("PM")
+        ? convertTo24Hour(eventItem.time)
+        : eventItem.time;
+    setForm({ ...eventItem, date: formattedDateForInput, time: formattedTimeForInput });
     setEditingEvent(eventItem);
-    // Scroll to the top where the form is located
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id) => {
-    // Find the event being deleted
     const eventToDelete = events.find((ev) => ev.id === id);
     if (eventToDelete && eventToDelete.image) {
       await deleteFileFromStorage(eventToDelete.image);
@@ -207,11 +321,10 @@ export default function AdminEventsPage() {
               <div>
                 <label className="block text-gray-700">Event Date:</label>
                 <input
-                  type="text"
+                  type="date"
                   name="date"
                   value={form.date}
                   onChange={handleChange}
-                  placeholder="Event Date"
                   className="w-full p-2 border rounded"
                   required
                 />
@@ -219,11 +332,10 @@ export default function AdminEventsPage() {
               <div>
                 <label className="block text-gray-700">Event Time:</label>
                 <input
-                  type="text"
+                  type="time"
                   name="time"
                   value={form.time}
                   onChange={handleChange}
-                  placeholder="Event Time"
                   className="w-full p-2 border rounded"
                   required
                 />
@@ -277,7 +389,24 @@ export default function AdminEventsPage() {
                 <h3 className="text-xl font-semibold">{eventItem.title}</h3>
                 <p className="text-gray-700">{eventItem.description}</p>
                 <p className="text-gray-600 mt-1">
-                  {eventItem.date} at {eventItem.time} &bull; {eventItem.location}
+                  {formatDateTime(
+                    // Convert stored "mm/dd/yyyy" back to "yyyy-mm-dd" for display.
+                    (() => {
+                      const [month, day, year] = eventItem.date.split("/");
+                      return `${year}-${month}-${day}`;
+                    })(),
+                    // Convert stored 12-hour time to 24-hour for formatting.
+                    (() => {
+                      if (
+                        eventItem.time.toUpperCase().includes("AM") ||
+                        eventItem.time.toUpperCase().includes("PM")
+                      ) {
+                        return convertTo24Hour(eventItem.time);
+                      }
+                      return eventItem.time;
+                    })()
+                  )}{" "}
+                  &bull; {eventItem.location}
                 </p>
                 {eventItem.image && (
                   <div className="mt-2">
