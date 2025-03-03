@@ -15,11 +15,23 @@ export default function Navbar() {
 
   useEffect(() => {
     async function checkAdminSession() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setAdminLoggedIn(!!session);
     }
     checkAdminSession();
+  
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setAdminLoggedIn(!!session);
+      // Optionally, redirect if needed:
+      // if (!session) window.location.href = "/admin/login";
+    });
+    return () => subscription.unsubscribe();
   }, []);
+  
 
   // Determine the admin button's text and link based on session status
   const adminButtonText = adminLoggedIn ? 'Go to Dashboard' : 'Admin Login';
