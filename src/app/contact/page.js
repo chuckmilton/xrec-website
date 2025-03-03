@@ -82,14 +82,14 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="text-white w-full hover:bg-orange-600 font-semibold py-2 px-4 rounded transition-colors duration-300 border-2 border-orange bg-orange"
+              className="text-white w-full hover:bg-purple-500 font-semibold py-2 px-4 rounded transition-colors duration-300 bg-purple-400"
             >
               Send Message
             </button>
             {status && <p className="mt-4 text-center">{status}</p>}
           </form>
           {/* Google Maps Location */}
-          <div className="w-full h-full">
+          <div className="w-full h-full flex justify-center">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.0450492949844!2d-118.1140221!3d33.7771171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd3129bdeb6643%3A0x2bdb37b3e143622f!2sInnovation%20Space!5e1!3m2!1sen!2sus!4v1740963628574!5m2!1sen!2sus"
               width="600"
@@ -98,7 +98,7 @@ export default function Contact() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-64 md:h-full rounded shadow"
+              className="w-full max-w-lg h-64 md:h-full rounded shadow"
             ></iframe>
           </div>
         </div>
