@@ -1,15 +1,29 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { supabase } from '../utils/supabaseClient';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [adminLoggedIn, setAdminLoggedIn] = useState(false);
   const pathname = usePathname();
 
   const linkClasses = (path) =>
     pathname === path ? 'underline' : 'hover:underline';
+
+  useEffect(() => {
+    async function checkAdminSession() {
+      const { data: { session } } = await supabase.auth.getSession();
+      setAdminLoggedIn(!!session);
+    }
+    checkAdminSession();
+  }, []);
+
+  // Determine the admin button's text and link based on session status
+  const adminButtonText = adminLoggedIn ? 'Go to Dashboard' : 'Admin Login';
+  const adminButtonHref = adminLoggedIn ? '/admin/dashboard' : '/admin/login';
 
   return (
     <nav className="bg-foreground p-2">
@@ -81,13 +95,13 @@ export default function Navbar() {
               Contact
             </Link>
           </li>
-          {/* Distinct Admin Login button */}
+          {/* Distinct Admin button */}
           <li>
             <Link
-              href="/admin/login"
+              href={adminButtonHref}
               className="bg-purple-400 text-white px-3 py-2 rounded hover:bg-purple-500"
             >
-              Admin Login
+              {adminButtonText}
             </Link>
           </li>
         </ul>
@@ -130,13 +144,13 @@ export default function Navbar() {
               Contact
             </Link>
           </li>
-          {/* Distinct Admin Login button */}
+          {/* Distinct Admin button */}
           <li>
             <Link
-              href="/admin/login"
+              href={adminButtonHref}
               className="bg-purple-400 text-white px-3 py-2 rounded hover:bg-purple-500"
             >
-              Admin Login
+              {adminButtonText}
             </Link>
           </li>
         </ul>
